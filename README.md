@@ -2,7 +2,7 @@
 
 Plataforma sustentável gamificada, reestruturada como uma **Single Page Application (SPA)** com **React + Vite + TypeScript**, evoluindo o projeto estático (HTML, CSS e JavaScript puro) desenvolvido nas Sprints 01 e 02.
 
-O Soul Hunter incentiva hábitos sustentáveis através de missões, pontuação e rankings, unindo gamificação, tecnologia e sustentabilidade urbana em uma experiência moderna, responsiva e totalmente componentizada — agora com uma **identidade visual noturna e sobrenatural**, fantasmas espalhados pela interface e um sistema de pontuação de verdade, que reage ao que o usuário faz.
+O Soul Hunter incentiva hábitos sustentáveis através de missões, pontuação e rankings, unindo gamificação, tecnologia e sustentabilidade urbana em uma experiência moderna, responsiva e totalmente componentizada — agora com uma **identidade visual noturna e sobrenatural**, fantasmas espalhados pela interface e um sistema de pontuação de verdade, que reage ao que o usuário faz, além do merge no futuro sistema de captura de fantasmas!
 
 > **Solução do Projeto:** as páginas **Dashboard** (`/dashboard`) e **Ranking** (`/ranking`) representam a solução funcional do produto. No Dashboard, o usuário responde missões reais na "Central de Missões" e ganha pontos instantaneamente; esses pontos são refletidos ao vivo no Ranking, competindo com caçadores de referência fixos.
 
