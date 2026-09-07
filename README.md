@@ -8,7 +8,7 @@ O Soul Hunter incentiva hábitos sustentáveis através de missões, pontuação
 
 ---
 
-## 📸 Capturas de tela
+## 📸 Print da interface do site
 
 | Home | Dashboard |
 |---|---|
