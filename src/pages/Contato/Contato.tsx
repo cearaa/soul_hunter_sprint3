@@ -25,16 +25,7 @@ export default function Contato() {
     },
   });
 
-  const urgenciaSelecionada = watch("urgencia");
-  const corUrgencia = urgencias.find((item) => item.value === urgenciaSelecionada)?.color ?? "#22d3ee";
 
-  const onSubmit: SubmitHandler<ContatoFormData> = async (data) => {
-    // Não há consumo de API nesta Sprint 03: simulamos o envio localmente.
-    await new Promise((resolve) => setTimeout(resolve, 400));
-    console.log("Formulário de contato enviado:", data);
-    setEnviado(true);
-    reset();
-  };
 
   return (
     <section className="relative overflow-hidden py-12">
@@ -119,24 +110,6 @@ export default function Contato() {
               {motivos.map((motivo) => (
                 <option key={motivo.value} value={motivo.value} className="bg-soul-900">
                   {motivo.label}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="urgencia" className="mb-1 block font-semibold text-white/90">
-              Nível de urgência
-            </label>
-            <select
-              id="urgencia"
-              className="w-full cursor-pointer rounded-lg border px-4 py-3 text-white focus:outline-none"
-              style={{ borderColor: `${corUrgencia}80`, backgroundColor: `${corUrgencia}14` }}
-              {...register("urgencia")}
-            >
-              {urgencias.map((urgencia) => (
-                <option key={urgencia.value} value={urgencia.value} className="bg-soul-900">
-                  {urgencia.label}
                 </option>
               ))}
             </select>
