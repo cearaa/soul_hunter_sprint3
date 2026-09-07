@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import { GameProvider } from "./context/GameContext";
+import Contato from "./pages/Contato/Contato";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Fantasma from "./pages/Fantasma/Fantasma";
 import Faq from "./pages/Faq/Faq";
