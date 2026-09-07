@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@theme {
+  /* Base noturna */
+  --color-soul-950: #040914;
+  --color-soul-900: #071a2f;
+  --color-soul-800: #0b2742;
+  --color-soul-700: #103a5c;
+  --color-soul-600: #155e75;
+
+  /* Acentos vibrantes */
+  --color-soul-cyan: #22d3ee;
+  --color-soul-cyan-soft: #67e8f9;
+  --color-soul-teal: #2dd4bf;
+  --color-soul-violet: #8b5cf6;
+  --color-soul-violet-soft: #a78bfa;
+  --color-soul-magenta: #d946ef;
+  --color-soul-gold: #fbbf24;
+
+  /* Superfícies claras (usadas em cards sobre fundo escuro) */
+  --color-soul-surface: #0f2942;
+  --color-soul-surface-light: #142f4d;
+
+  --font-display: "Poppins", "Segoe UI", Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply min-h-screen text-slate-100;
+  background-color: var(--color-soul-900);
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(34, 211, 238, 0.14), transparent 40%),
+    radial-gradient(circle at 85% 0%, rgba(139, 92, 246, 0.16), transparent 45%),
+    radial-gradient(circle at 50% 100%, rgba(217, 70, 239, 0.10), transparent 50%),
+    linear-gradient(180deg, #071a2f 0%, #0b2742 55%, #071a2f 100%);
+  background-attachment: fixed;
+}
+
+#root {
+  @apply relative flex min-h-screen flex-col overflow-x-clip;
+}
+
+::selection {
+  background: var(--color-soul-magenta);
+  color: white;
+}
+
+/* Glass card usado em várias páginas */
+.glass-card {
+  @apply rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm;
+}
+
+/* Brilho neon reutilizável */
+.neon-text {
+  text-shadow: 0 0 12px currentColor;
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0px) rotate(var(--ghost-rot, 0deg)); }
+  50% { transform: translateY(-18px) rotate(var(--ghost-rot, 0deg)); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50% { transform: translateY(-10px) translateX(6px); }
+}
+
+.animate-float {
+  animation: float-y 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 9s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Scrollbar mais sombria, combinando com o tema */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-soul-900);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-soul-700);
+  border-radius: 999px;
+}
