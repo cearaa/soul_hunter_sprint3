@@ -87,7 +87,7 @@ npm run build
 npm run preview
 ```
 
-O projeto abrirá por padrão em `http://localhost:5173`.
+O projeto abrirá por padrão em `http://localhost:5173 `.
 
 **Dica para testar a gamificação:** acesse `/dashboard`, defina um nome de caçador(a) e responda algumas missões — depois vá até `/ranking` pelo menu (não recarregue a página) para ver sua pontuação refletida ao vivo na tabela.
 
@@ -114,7 +114,6 @@ O projeto abrirá por padrão em `http://localhost:5173`.
 
 ## 📞 Contato
 
-Dúvidas sobre o projeto podem ser enviadas para qualquer um dos integrantes listados acima, através do LinkedIn ou GitHub, ou pelo próprio formulário da página **Contato** da aplicação.
 
 ---
 
