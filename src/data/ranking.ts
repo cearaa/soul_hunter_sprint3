@@ -6,13 +6,13 @@ import type { Medalha, RankingEntry } from "../types";
  * dinamicamente ao responder as missões do Dashboard ou o quiz do FAQ
  */
 export const rankingReferencia: Omit<RankingEntry, "posicao" | "medalha">[] = [
-  { usuario: "Anônimo_Caçador", pontos: 980 },
-  { usuario: "GhostBuster_SP", pontos: 860 },
-  { usuario: "AlmaVerde", pontos: 730 },
-  { usuario: "MetroWalker", pontos: 610 },
-  { usuario: "RecicladorPro", pontos: 540 },
-  { usuario: "Passe_Livre99", pontos: 430 },
-  { usuario: "SoulNoturno", pontos: 310 },
+  { usuario: "TárikZada", pontos: 980 },
+  { usuario: "Caerinha", pontos: 860 },
+  { usuario: "Ceará", pontos: 730 },
+  { usuario: "Moussa", pontos: 610 },
+  { usuario: "Alma", pontos: 540 },
+  { usuario: "Tárik melhor aluno", pontos: 430 },
+  { usuario: "Usuário Anônimo", pontos: 330 },
 ];
 
 export const medalhaEmoji: Record<Medalha, string> = {
