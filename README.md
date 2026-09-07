@@ -10,22 +10,6 @@ O Soul Hunter incentiva hábitos sustentáveis através de missões, pontuação
 
 ## 📸 Print da interface do site
 
-| Home | Dashboard |
-|---|---|
-| ![Home](docs/screenshots/home.png) | ![Dashboard](docs/screenshots/dashboard.png) |
-
-| Ranking | Integrantes |
-|---|---|
-| ![Ranking](docs/screenshots/ranking.png) | ![Integrantes](docs/screenshots/integrantes.png) |
-
-| Sobre | FAQ |
-|---|---|
-| ![Sobre](docs/screenshots/sobre.png) | ![FAQ](docs/screenshots/faq.png) |
-
-| Home (mobile) |
-|---|
-| <img src="docs/screenshots/home-mobile.png" width="260"/> |
-
 **Ícones do sistema:** os ícones de GitHub e LinkedIn (`src/assets/img/icones/github.png` e `linkedin.png`) aparecem nos cards de Integrantes. O favicon (`public/favicon.svg`) e os fantasmas decorativos (SVG originais, componente `Ghost`) seguem a paleta noturna azul/ciano/roxo/magenta/dourado do projeto.
 
 ---
@@ -42,14 +26,6 @@ O SoulHunter adota uma atmosfera **noturna, tecnológica e sobrenatural**:
 
 ---
 
-## 🕹️ Gamificação interativa
-
-- **Central de Missões (Dashboard):** o usuário define seu nome de caçador(a) e responde 15 perguntas sobre hábitos sustentáveis e a caça de almas (ex.: *"Quantos KG você reciclou hoje?"*, *"Quantos fantasmas você capturou essa semana?"*). Qualquer resposta preenchida já concede pontos — não há tratamento de erro, pois o objetivo é demonstrar o funcionamento do sistema (Sprint 03 não consome API).
-- **Ranking dinâmico:** os pontos do usuário atual são somados em tempo real e mesclados com 7 caçadores de referência fixos (`src/data/ranking.ts`), reordenando a tabela e recalculando medalhas 🥇🥈🥉 a cada resposta.
-- **Quiz do FAQ:** algumas perguntas frequentes trazem um mini quiz de múltipla escolha. Acertando ou errando, o usuário sempre ganha pontos extras — com feedback visual diferente para cada caso.
-- Todo esse estado é compartilhado entre páginas via **React Context** (`src/context/GameContext.tsx`), com notificações "toast" (`+pontos`) flutuando na tela a cada conquista.
-
----
 
 ## 🚀 Tecnologias utilizadas
 
@@ -69,64 +45,6 @@ O SoulHunter adota uma atmosfera **noturna, tecnológica e sobrenatural**:
 
 ## 📂 Estrutura de pastas
 
-```plaintext
-📦 soulhunter-react
-┣ 📂 docs
-┃ ┗ 📂 screenshots
-┣ 📂 public
-┃ ┗ 📄 favicon.svg
-┣ 📂 src
-┃ ┣ 📂 assets
-┃ ┃ ┗ 📂 img
-┃ ┃   ┣ 📂 almas
-┃ ┃   ┗ 📂 icones
-┃ ┣ 📂 components
-┃ ┃ ┣ 📂 BackToTop
-┃ ┃ ┣ 📂 Button
-┃ ┃ ┣ 📂 Card
-┃ ┃ ┣ 📂 ExpandableCard
-┃ ┃ ┣ 📂 Footer
-┃ ┃ ┣ 📂 Ghost          (fantasma SVG + campo decorativo)
-┃ ┃ ┣ 📂 Header
-┃ ┃ ┣ 📂 Layout
-┃ ┃ ┗ 📂 ToastStack
-┃ ┣ 📂 context
-┃ ┃ ┗ 📄 GameContext.tsx  (pontos, usuário e ranking compartilhados)
-┃ ┣ 📂 data
-┃ ┃ ┣ 📄 almas.ts
-┃ ┃ ┣ 📄 faq.ts           (perguntas + mini quiz)
-┃ ┃ ┣ 📄 integrantes.ts
-┃ ┃ ┣ 📄 missoes.ts       (perguntas do Dashboard)
-┃ ┃ ┗ 📄 ranking.ts       (ranking de referência + merge dinâmico)
-┃ ┣ 📂 hooks
-┃ ┃ ┗ 📄 useDocumentTitle.ts
-┃ ┣ 📂 pages
-┃ ┃ ┣ 📂 Contato
-┃ ┃ ┣ 📂 Dashboard        (+ MissionPanel.tsx)
-┃ ┃ ┣ 📂 Fantasma         (easter egg / rota secreta)
-┃ ┃ ┣ 📂 Faq              (+ FaqQuizBlock.tsx)
-┃ ┃ ┣ 📂 Home
-┃ ┃ ┣ 📂 IntegranteDetalhe (rota dinâmica)
-┃ ┃ ┣ 📂 Integrantes
-┃ ┃ ┣ 📂 NotFound
-┃ ┃ ┣ 📂 Ranking
-┃ ┃ ┗ 📂 Sobre
-┃ ┣ 📂 theme
-┃ ┃ ┗ 📄 pageAccent.ts    (cor de identidade por rota)
-┃ ┣ 📂 types
-┃ ┃ ┗ 📄 index.ts
-┃ ┣ 📄 App.tsx
-┃ ┣ 📄 index.css          (tema Tailwind customizado)
-┃ ┗ 📄 main.tsx
-┣ 📄 index.html
-┣ 📄 package.json
-┣ 📄 tsconfig.json
-┗ 📄 vite.config.ts
-```
-
-Cada página vive em `/src/pages` e cada componente reutilizável vive em `/src/components`, seguindo o padrão `NomeDoComponente/NomeDoComponente.tsx`.
-
----
 
 ## 🧭 Rotas da aplicação
 
@@ -169,7 +87,7 @@ npm run build
 npm run preview
 ```
 
-O projeto abrirá por padrão em `http://localhost:5173`.
+O projeto abrirá por padrão em `http://localhost:5173 `.
 
 **Dica para testar a gamificação:** acesse `/dashboard`, defina um nome de caçador(a) e responda algumas missões — depois vá até `/ranking` pelo menu (não recarregue a página) para ver sua pontuação refletida ao vivo na tabela.
 
@@ -196,7 +114,6 @@ O projeto abrirá por padrão em `http://localhost:5173`.
 
 ## 📞 Contato
 
-Dúvidas sobre o projeto podem ser enviadas para qualquer um dos integrantes listados acima, através do LinkedIn ou GitHub, ou pelo próprio formulário da página **Contato** da aplicação.
 
 ---
 
