@@ -45,64 +45,6 @@ O SoulHunter adota uma atmosfera **noturna, tecnológica e sobrenatural**:
 
 ## 📂 Estrutura de pastas
 
-```plaintext
-📦 soulhunter-react
-┣ 📂 docs
-┃ ┗ 📂 screenshots
-┣ 📂 public
-┃ ┗ 📄 favicon.svg
-┣ 📂 src
-┃ ┣ 📂 assets
-┃ ┃ ┗ 📂 img
-┃ ┃   ┣ 📂 almas
-┃ ┃   ┗ 📂 icones
-┃ ┣ 📂 components
-┃ ┃ ┣ 📂 BackToTop
-┃ ┃ ┣ 📂 Button
-┃ ┃ ┣ 📂 Card
-┃ ┃ ┣ 📂 ExpandableCard
-┃ ┃ ┣ 📂 Footer
-┃ ┃ ┣ 📂 Ghost          (fantasma SVG + campo decorativo)
-┃ ┃ ┣ 📂 Header
-┃ ┃ ┣ 📂 Layout
-┃ ┃ ┗ 📂 ToastStack
-┃ ┣ 📂 context
-┃ ┃ ┗ 📄 GameContext.tsx  (pontos, usuário e ranking compartilhados)
-┃ ┣ 📂 data
-┃ ┃ ┣ 📄 almas.ts
-┃ ┃ ┣ 📄 faq.ts           (perguntas + mini quiz)
-┃ ┃ ┣ 📄 integrantes.ts
-┃ ┃ ┣ 📄 missoes.ts       (perguntas do Dashboard)
-┃ ┃ ┗ 📄 ranking.ts       (ranking de referência + merge dinâmico)
-┃ ┣ 📂 hooks
-┃ ┃ ┗ 📄 useDocumentTitle.ts
-┃ ┣ 📂 pages
-┃ ┃ ┣ 📂 Contato
-┃ ┃ ┣ 📂 Dashboard        (+ MissionPanel.tsx)
-┃ ┃ ┣ 📂 Fantasma         (easter egg / rota secreta)
-┃ ┃ ┣ 📂 Faq              (+ FaqQuizBlock.tsx)
-┃ ┃ ┣ 📂 Home
-┃ ┃ ┣ 📂 IntegranteDetalhe (rota dinâmica)
-┃ ┃ ┣ 📂 Integrantes
-┃ ┃ ┣ 📂 NotFound
-┃ ┃ ┣ 📂 Ranking
-┃ ┃ ┗ 📂 Sobre
-┃ ┣ 📂 theme
-┃ ┃ ┗ 📄 pageAccent.ts    (cor de identidade por rota)
-┃ ┣ 📂 types
-┃ ┃ ┗ 📄 index.ts
-┃ ┣ 📄 App.tsx
-┃ ┣ 📄 index.css          (tema Tailwind customizado)
-┃ ┗ 📄 main.tsx
-┣ 📄 index.html
-┣ 📄 package.json
-┣ 📄 tsconfig.json
-┗ 📄 vite.config.ts
-```
-
-Cada página vive em `/src/pages` e cada componente reutilizável vive em `/src/components`, seguindo o padrão `NomeDoComponente/NomeDoComponente.tsx`.
-
----
 
 ## 🧭 Rotas da aplicação
 
