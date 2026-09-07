@@ -95,7 +95,7 @@ export default function Integrantes() {
                     style={{ color: ghostColor }}
                     aria-expanded={isExpanded}
                   >
-                    {isExpanded ? "Mostrar menos ▲" : "Ver mais sobre essa pessoinha ▼"}
+                    {isExpanded ? "Mostrar menos ▲" : "Ver mais sobre esse BBzão ▼"}
                   </button>
 
                   {isExpanded && (
