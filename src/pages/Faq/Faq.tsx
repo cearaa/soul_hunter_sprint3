@@ -1,6 +1,8 @@
 import { useState } from "react";
+import GhostField from "../../components/Ghost/GhostField";
+import { faqItems } from "../../data/faq";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
-
+import FaqQuizBlock from "./FaqQuizBlock";
 
 export default function Faq() {
   useDocumentTitle("FAQ");
@@ -29,7 +31,33 @@ export default function Faq() {
           Além de tirar dúvidas, algumas perguntas trazem um mini quiz — acerte ou erre, você
           ganha pontos do mesmo jeito. 👻
         </p>
-      
+
+        <div className="space-y-3 text-left">
+          {faqItems.map((item) => {
+            const isOpen = openId === item.id;
+            return (
+              <div
+                key={item.id}
+                className="glass-card overflow-hidden transition-all duration-300"
+              >
+                <button
+                  className="flex w-full items-center justify-between p-4 text-left text-lg font-bold text-white"
+                  onClick={() => toggleItem(item.id)}
+                  aria-expanded={isOpen}
+                >
+                  {item.pergunta}
+                  <span className="text-2xl text-soul-magenta">{isOpen ? "−" : "+"}</span>
+                </button>
+                {isOpen && (
+                  <div className="px-4 pb-4">
+                    <p className="text-white/75">{item.resposta}</p>
+                    {item.quiz && <FaqQuizBlock faqId={item.id} quiz={item.quiz} />}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

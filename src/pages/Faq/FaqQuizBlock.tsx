@@ -1,5 +1,6 @@
-import { useState, type JSXElementConstructor, type Key, type ReactElement, type ReactNode, type ReactPortal } from "react";
+import { useState } from "react";
 import { useGame } from "../../context/GameContext";
+import type { FaqQuiz } from "../../data/faq";
 
 interface FaqQuizBlockProps {
   faqId: string;
@@ -33,7 +34,7 @@ export default function FaqQuizBlock({ faqId, quiz }: FaqQuizBlockProps) {
       </p>
       <p className="mb-3 text-sm text-white/85">{quiz.pergunta}</p>
       <div className="flex flex-col gap-2">
-        {quiz.opcoes.map((opcao: boolean | Key | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined, index: number | null) => {
+        {quiz.opcoes.map((opcao, index) => {
           const isSelected = selected === index;
           const showCorrect = jaRespondeu && index === quiz.respostaCorretaIndex;
           return (
