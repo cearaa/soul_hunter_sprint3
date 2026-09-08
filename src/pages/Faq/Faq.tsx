@@ -1,3 +1,4 @@
+import { CircleHelp, Ghost as GhostIcon, Minus, Plus } from "lucide-react";
 import { useState } from "react";
 import GhostField from "../../components/Ghost/GhostField";
 import { faqItems } from "../../data/faq";
@@ -21,15 +22,17 @@ export default function Faq() {
         ]}
       />
       <div className="relative mx-auto w-[90%] max-w-4xl text-center">
-        <span className="mb-3 inline-block rounded-full border border-soul-magenta/40 bg-soul-magenta/10 px-4 py-1 text-sm font-semibold text-soul-magenta">
-          ❓ Dúvidas de caçador(a)
+        <span className="mb-3 inline-flex items-center gap-2 rounded-full border border-soul-magenta/40 bg-soul-magenta/10 px-4 py-1 text-sm font-semibold text-soul-magenta">
+          <CircleHelp className="h-4 w-4" aria-hidden="true" />
+          Dúvidas de caçador(a)
         </span>
         <h2 className="mb-3 text-3xl font-bold text-white sm:text-5xl">
           Perguntas Frequentes
         </h2>
         <p className="mb-10 text-white/70">
           Além de tirar dúvidas, algumas perguntas trazem um mini quiz — acerte ou erre, você
-          ganha pontos do mesmo jeito. 👻
+          ganha pontos do mesmo jeito.{" "}
+          <GhostIcon className="inline h-4 w-4 align-[-2px] text-soul-magenta" aria-hidden="true" />
         </p>
 
         <div className="space-y-3 text-left">
@@ -46,7 +49,9 @@ export default function Faq() {
                   aria-expanded={isOpen}
                 >
                   {item.pergunta}
-                  <span className="text-2xl text-soul-magenta">{isOpen ? "−" : "+"}</span>
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-soul-magenta/15 text-soul-magenta transition-transform duration-300" aria-hidden="true">
+                    {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+                  </span>
                 </button>
                 {isOpen && (
                   <div className="px-4 pb-4">

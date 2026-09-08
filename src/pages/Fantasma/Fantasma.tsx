@@ -1,3 +1,4 @@
+import { Eye, Ghost as GhostIcon, House } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
@@ -27,7 +28,9 @@ export default function Fantasma() {
       <section className="relative flex min-h-[80vh] items-center justify-center overflow-hidden bg-soul-950 py-16 text-center">
         <GhostField ghosts={ghostRain} />
         <div className="relative glass-card mx-4 max-w-md p-10">
-          <div className="mb-4 text-6xl">👻</div>
+          <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-soul-magenta/15 text-soul-magenta shadow-[0_0_28px_rgba(217,70,239,0.4)]">
+            <GhostIcon className="h-12 w-12" strokeWidth={1.75} aria-hidden="true" />
+          </div>
           <h2 className="mb-4 text-2xl font-bold text-white">
             Você tem certeza de que quer entrar?
           </h2>
@@ -56,9 +59,13 @@ export default function Fantasma() {
         </h1>
         <p className="mb-2 text-xl text-white">RAGEBAITADO DEMAISSSSSSSS</p>
         <p className="mx-auto mb-8 max-w-md text-white/70">
-          RAGEBAITADO FESSOR. O SoulHunter agradece a paciência (e a nota boa, se possível 👀).
+          RAGEBAITADO FESSOR. O SoulHunter agradece a paciência (e a nota boa, se possível{" "}
+          <Eye className="inline h-4 w-4 align-[-2px]" aria-hidden="true" />).
         </p>
-        <Button onClick={() => navigate("/")}>Voltar para a Home 🏠</Button>
+        <Button onClick={() => navigate("/")}>
+          <House className="h-5 w-5" aria-hidden="true" />
+          Voltar para a Home
+        </Button>
       </div>
     </section>
   );

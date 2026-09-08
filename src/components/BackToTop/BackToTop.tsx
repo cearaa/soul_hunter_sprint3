@@ -1,3 +1,4 @@
+import { ArrowUp } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function BackToTop() {
@@ -25,7 +26,7 @@ export default function BackToTop() {
         visible ? "visible opacity-100" : "invisible opacity-0 translate-y-2"
       }`}
     >
-      <span aria-hidden="true">↑</span>
+      <ArrowUp className="h-5 w-5" aria-hidden="true" />
     </button>
   );
 }

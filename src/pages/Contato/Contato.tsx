@@ -1,3 +1,12 @@
+import {
+  Check,
+  ChevronDown,
+  CircleCheck,
+  Compass,
+  Ghost as GhostIcon,
+  Mail,
+  Send,
+} from "lucide-react";
 import { useState } from "react";
 import { useForm, useWatch, type SubmitHandler } from "react-hook-form";
 import Button from "../../components/Button/Button";
@@ -58,6 +67,7 @@ export default function Contato() {
   const valores = useWatch({ control });
   const mensagem = valores.mensagem ?? "";
   const urgenciaAtual = urgenciasContato.find((item) => item.value === valores.urgencia);
+  const motivoAtual = motivosContato.find((item) => item.value === valores.motivo);
   const corDestaque = urgenciaAtual?.color ?? "#fbbf24";
 
   const preenchidos = CAMPOS.filter((campo) => {
@@ -103,8 +113,9 @@ export default function Contato() {
 
       <div className="relative mx-auto w-[92%] max-w-6xl">
         <div className="mb-10 text-center">
-          <span className="mb-3 inline-block rounded-full border border-soul-gold/40 bg-soul-gold/10 px-4 py-1 text-sm font-semibold text-soul-gold">
-            ✉️ Fale com a SoulUp
+          <span className="mb-3 inline-flex items-center gap-2 rounded-full border border-soul-gold/40 bg-soul-gold/10 px-4 py-1 text-sm font-semibold text-soul-gold">
+            <Mail className="h-4 w-4" aria-hidden="true" />
+            Fale com a SoulUp
           </span>
           <h2 className="mb-3 text-3xl font-bold text-white sm:text-5xl">Contato</h2>
           <p className="mx-auto max-w-2xl text-white/70">
@@ -120,17 +131,17 @@ export default function Contato() {
               <h3 className="mb-4 text-lg font-bold text-white">Como funciona o atendimento</h3>
               <ol className="space-y-4">
                 {[
-                  { emoji: "📨", titulo: "Você envia", texto: "Preencha o formulário ao lado com o máximo de detalhes." },
-                  { emoji: "🧭", titulo: "Triagem", texto: "O motivo e a urgência definem para qual time a mensagem vai." },
-                  { emoji: "👻", titulo: "Resposta", texto: "Um caçador(a) da equipe SoulUp responde no seu e-mail." },
+                  { icon: Send, titulo: "Você envia", texto: "Preencha o formulário ao lado com o máximo de detalhes." },
+                  { icon: Compass, titulo: "Triagem", texto: "O motivo e a urgência definem para qual time a mensagem vai." },
+                  { icon: GhostIcon, titulo: "Resposta", texto: "Um caçador(a) da equipe SoulUp responde no seu e-mail." },
                 ].map((passo, index) => (
                   <li key={passo.titulo} className="flex gap-3">
                     <span
-                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-lg"
-                      style={{ backgroundColor: `${corDestaque}22` }}
+                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl transition-colors duration-500"
+                      style={{ backgroundColor: `${corDestaque}22`, color: corDestaque }}
                       aria-hidden="true"
                     >
-                      {passo.emoji}
+                      <passo.icon className="h-4.5 w-4.5" />
                     </span>
                     <div>
                       <p className="text-sm font-semibold text-white">
@@ -154,8 +165,9 @@ export default function Contato() {
               </h3>
               {urgenciaAtual ? (
                 <div key={urgenciaAtual.value} className="animate-fade-in">
-                  <p className="text-2xl font-bold neon-text" style={{ color: urgenciaAtual.color }}>
-                    {urgenciaAtual.emoji} {urgenciaAtual.prazo}
+                  <p className="flex items-center gap-2 text-2xl font-bold neon-text" style={{ color: urgenciaAtual.color }}>
+                    <urgenciaAtual.icon className="h-6 w-6 shrink-0" aria-hidden="true" />
+                    {urgenciaAtual.prazo}
                   </p>
                   <p className="mt-1 text-sm text-white/65">{urgenciaAtual.descricao}</p>
                 </div>
@@ -173,8 +185,8 @@ export default function Contato() {
               style={{ boxShadow: "0 0 32px rgba(45,212,191,0.25)" }}
               role="status"
             >
-              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-soul-teal/15 text-4xl shadow-[0_0_24px_rgba(45,212,191,0.4)]">
-                <span aria-hidden="true">✅</span>
+              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-soul-teal/15 text-soul-teal shadow-[0_0_24px_rgba(45,212,191,0.4)]">
+                <CircleCheck className="h-11 w-11" strokeWidth={1.75} aria-hidden="true" />
               </div>
               <h3 className="text-2xl font-bold text-white sm:text-3xl">
                 Mensagem enviada, <span className="text-soul-teal neon-text">{enviado.nome}</span>!
@@ -187,10 +199,15 @@ export default function Contato() {
               <dl className="mt-2 grid w-full max-w-md grid-cols-1 gap-3 text-left sm:grid-cols-2">
                 <div className="rounded-xl border border-white/10 bg-white/5 p-4">
                   <dt className="text-xs font-semibold uppercase tracking-wide text-white/50">Motivo</dt>
-                  <dd className="mt-1 font-semibold text-white">
-                    {motivosContato.find((m) => m.value === enviado.motivo)?.emoji}{" "}
-                    {motivosContato.find((m) => m.value === enviado.motivo)?.label}
-                  </dd>
+                  {(() => {
+                    const motivo = motivosContato.find((m) => m.value === enviado.motivo);
+                    return (
+                      <dd className="mt-1 flex items-center gap-2 font-semibold text-white">
+                        {motivo && <motivo.icon className="h-4 w-4 shrink-0 text-soul-gold" aria-hidden="true" />}
+                        {motivo?.label}
+                      </dd>
+                    );
+                  })()}
                 </div>
                 {(() => {
                   const urgencia = urgenciasContato.find((u) => u.value === enviado.urgencia);
@@ -202,8 +219,9 @@ export default function Contato() {
                       <dt className="text-xs font-semibold uppercase tracking-wide text-white/50">
                         Urgência · prazo
                       </dt>
-                      <dd className="mt-1 font-semibold" style={{ color: urgencia?.color }}>
-                        {urgencia?.emoji} {urgencia?.label} · {urgencia?.prazo}
+                      <dd className="mt-1 flex items-center gap-2 font-semibold" style={{ color: urgencia?.color }}>
+                        {urgencia && <urgencia.icon className="h-4 w-4 shrink-0" aria-hidden="true" />}
+                        {urgencia?.label} · {urgencia?.prazo}
                       </dd>
                     </div>
                   );
@@ -317,12 +335,23 @@ export default function Contato() {
                 hint="Isso direciona sua mensagem para o time certo."
               >
                 <div className="relative">
+                  {motivoAtual ? (
+                    <motivoAtual.icon
+                      className="pointer-events-none absolute left-4 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-soul-gold"
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <Mail
+                      className="pointer-events-none absolute left-4 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-white/35"
+                      aria-hidden="true"
+                    />
+                  )}
                   <select
                     id="motivo"
                     defaultValue=""
                     aria-invalid={!!errors.motivo}
                     aria-describedby={describedBy("motivo", !!errors.motivo, true)}
-                    className={`${inputBase} appearance-none pr-11 ${inputState(!!errors.motivo, campoValido("motivo"))} ${
+                    className={`${inputBase} appearance-none pl-11 pr-11 ${inputState(!!errors.motivo, campoValido("motivo"))} ${
                       valores.motivo ? "text-white" : "text-white/35"
                     }`}
                     {...register("motivo", {
@@ -334,18 +363,14 @@ export default function Contato() {
                     </option>
                     {motivosContato.map((motivo) => (
                       <option key={motivo.value} value={motivo.value} className="bg-soul-900 text-white">
-                        {motivo.emoji} {motivo.label}
+                        {motivo.label}
                       </option>
                     ))}
                   </select>
-                  <svg
+                  <ChevronDown
                     className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/50"
-                    viewBox="0 0 20 20"
-                    fill="none"
                     aria-hidden="true"
-                  >
-                    <path d="M5 8l5 5 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                  />
                 </div>
               </FormField>
 
@@ -391,8 +416,15 @@ export default function Contato() {
                             required: "Escolha um nível de urgência para a mensagem.",
                           })}
                         />
-                        <span className="text-2xl" aria-hidden="true">
-                          {urgencia.emoji}
+                        <span
+                          className="flex h-9 w-9 items-center justify-center rounded-full transition-colors duration-300"
+                          style={{
+                            backgroundColor: selecionada ? `${urgencia.color}2a` : "rgba(255,255,255,0.06)",
+                            color: selecionada ? urgencia.color : "rgba(255,255,255,0.7)",
+                          }}
+                          aria-hidden="true"
+                        >
+                          <urgencia.icon className="h-5 w-5" />
                         </span>
                         <span
                           className="text-sm font-semibold"
@@ -403,11 +435,11 @@ export default function Contato() {
                         <span className="text-[11px] leading-tight text-white/50">{urgencia.prazo}</span>
                         {selecionada && (
                           <span
-                            className="animate-fade-in absolute right-2 top-2 flex h-4 w-4 items-center justify-center rounded-full text-[10px] text-soul-950"
+                            className="animate-fade-in absolute right-2 top-2 flex h-4 w-4 items-center justify-center rounded-full text-soul-950"
                             style={{ backgroundColor: urgencia.color }}
                             aria-hidden="true"
                           >
-                            ✔
+                            <Check className="h-3 w-3" strokeWidth={3} />
                           </span>
                         )}
                       </label>
@@ -472,7 +504,10 @@ export default function Contato() {
                       Enviando…
                     </>
                   ) : (
-                    <>Enviar mensagem 👻</>
+                    <>
+                      Enviar mensagem
+                      <Send className="h-4 w-4" aria-hidden="true" />
+                    </>
                   )}
                 </Button>
               </div>

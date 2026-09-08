@@ -1,3 +1,4 @@
+import { CircleCheck, Ghost as GhostIcon, Target } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import { useGame } from "../../context/GameContext";
 import { missoes } from "../../data/missoes";
@@ -14,10 +15,10 @@ export default function MissionPanel() {
     setNomeConfirmado(true);
   }
 
-  function handleResponder(missionId: string, pontos: number, emoji: string) {
+  function handleResponder(missionId: string, pontos: number) {
     const resposta = respostas[missionId];
     if (!resposta || resposta.trim() === "") return;
-    awardPoints(missionId, pontos, `+${pontos} pontos! ${emoji}`);
+    awardPoints(missionId, pontos, `+${pontos} pontos!`);
   }
 
   const respondidas = answeredMissionIds.filter((id) => !id.startsWith("faq-")).length;
@@ -25,7 +26,10 @@ export default function MissionPanel() {
   return (
     <div className="glass-card flex h-full flex-col overflow-hidden p-5">
       <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-lg font-bold text-white">🎯 Central de Missões</h3>
+        <h3 className="flex items-center gap-2 text-lg font-bold text-white">
+          <Target className="h-5 w-5 text-soul-cyan" aria-hidden="true" />
+          Central de Missões
+        </h3>
         <span className="rounded-full bg-soul-cyan/15 px-3 py-1 text-xs font-semibold text-soul-cyan">
           {respondidas}/{missoes.length}
         </span>
@@ -45,9 +49,10 @@ export default function MissionPanel() {
           />
           <button
             type="submit"
-            className="rounded-lg bg-gradient-to-r from-soul-cyan to-soul-violet px-4 py-2 font-semibold text-soul-950 transition-transform hover:-translate-y-0.5"
+            className="flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-soul-cyan to-soul-violet px-4 py-2 font-semibold text-soul-950 transition-transform hover:-translate-y-0.5"
           >
-            Confirmar e começar a caçada 👻
+            Confirmar e começar a caçada
+            <GhostIcon className="h-4 w-4" aria-hidden="true" />
           </button>
         </form>
       ) : (
@@ -68,12 +73,14 @@ export default function MissionPanel() {
                       : "border-white/10 bg-white/5"
                   }`}
                 >
-                  <p className="mb-2 text-sm font-medium text-white/90">
-                    <span aria-hidden="true">{missao.emoji}</span> {missao.pergunta}
+                  <p className="mb-2 flex items-center gap-2 text-sm font-medium text-white/90">
+                    <missao.icon className="h-4 w-4 shrink-0 text-soul-teal" aria-hidden="true" />
+                    {missao.pergunta}
                   </p>
                   {jaRespondida ? (
-                    <p className="text-xs font-semibold text-soul-teal">
-                      ✔ Concluída (+{missao.pontos} pontos)
+                    <p className="flex items-center gap-1 text-xs font-semibold text-soul-teal">
+                      <CircleCheck className="h-3.5 w-3.5" aria-hidden="true" />
+                      Concluída (+{missao.pontos} pontos)
                     </p>
                   ) : (
                     <div className="flex gap-2">
@@ -90,7 +97,7 @@ export default function MissionPanel() {
                         className="min-w-0 flex-1 rounded-lg border border-white/15 bg-soul-900/60 px-3 py-1.5 text-sm text-white placeholder:text-white/40 focus:border-soul-cyan focus:outline-none"
                       />
                       <button
-                        onClick={() => handleResponder(missao.id, missao.pontos, missao.emoji)}
+                        onClick={() => handleResponder(missao.id, missao.pontos)}
                         className="shrink-0 rounded-lg bg-soul-cyan/20 px-3 py-1.5 text-xs font-semibold text-soul-cyan transition-colors hover:bg-soul-cyan/30"
                       >
                         +{missao.pontos} pts

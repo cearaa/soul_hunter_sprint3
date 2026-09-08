@@ -1,3 +1,4 @@
+import { Atom, BookOpen, Compass, Gamepad2, Ghost as GhostIcon, Globe, Trophy } from "lucide-react";
 import ExpandableCard from "../../components/ExpandableCard/ExpandableCard";
 import GhostField from "../../components/Ghost/GhostField";
 import { almas } from "../../data/almas";
@@ -15,8 +16,9 @@ export default function Sobre() {
         ]}
       />
       <div className="relative mx-auto w-[90%] max-w-6xl text-center">
-        <span className="mb-3 inline-block rounded-full border border-soul-teal/40 bg-soul-teal/10 px-4 py-1 text-sm font-semibold text-soul-teal">
-          📖 O universo por trás do jogo
+        <span className="mb-3 inline-flex items-center gap-2 rounded-full border border-soul-teal/40 bg-soul-teal/10 px-4 py-1 text-sm font-semibold text-soul-teal">
+          <BookOpen className="h-4 w-4" aria-hidden="true" />
+          O universo por trás do jogo
         </span>
         <h2 className="mb-3 text-3xl font-bold text-white sm:text-5xl">Sobre o Projeto</h2>
         <p className="mx-auto mb-10 max-w-2xl text-white/70">
@@ -27,7 +29,7 @@ export default function Sobre() {
 
         <div className="grid grid-cols-1 gap-5 text-left sm:grid-cols-2 lg:grid-cols-3">
           <ExpandableCard
-            emoji="🧭"
+            icon={Compass}
             title="Contexto"
             color="#2dd4bf"
             summary={
@@ -47,7 +49,7 @@ export default function Sobre() {
           />
 
           <ExpandableCard
-            emoji="🎮"
+            icon={Gamepad2}
             title="Gamificação"
             color="#22d3ee"
             summary={<p>Mecânicas de jogo para tornar sustentabilidade divertida e viciante.</p>}
@@ -61,7 +63,7 @@ export default function Sobre() {
           />
 
           <ExpandableCard
-            emoji="🌍"
+            icon={Globe}
             title="Soluções Sustentáveis"
             color="#fbbf24"
             summary={<p>Impacto social e ambiental real por trás de cada missão cumprida.</p>}
@@ -77,7 +79,7 @@ export default function Sobre() {
           />
 
           <ExpandableCard
-            emoji="⚛️"
+            icon={Atom}
             title="Tecnologias desta Sprint"
             color="#8b5cf6"
             summary={<p>Evolução total do front-end: de páginas estáticas para uma SPA moderna.</p>}
@@ -94,7 +96,7 @@ export default function Sobre() {
           />
 
           <ExpandableCard
-            emoji="🏆"
+            icon={Trophy}
             title="Gamificação em números"
             color="#d946ef"
             summary={<p>O Dashboard e o Ranking mostram a solução funcionando de verdade.</p>}
@@ -109,7 +111,7 @@ export default function Sobre() {
           />
 
           <ExpandableCard
-            emoji="👻"
+            icon={GhostIcon}
             title="As Almas"
             color="#67e8f9"
             summary={<p>Cada fantasma tem raridade, personalidade e habilidades únicas.</p>}

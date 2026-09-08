@@ -1,3 +1,4 @@
+import { Target } from "lucide-react";
 import GhostField from "../../components/Ghost/GhostField";
 import { useGame } from "../../context/GameContext";
 import { buildRanking } from "../../data/ranking";
@@ -25,8 +26,9 @@ export default function Dashboard() {
       />
       <div className="relative mx-auto w-[92%] max-w-6xl">
         <div className="mb-8 text-center">
-          <span className="mb-3 inline-block rounded-full border border-soul-cyan/40 bg-soul-cyan/10 px-4 py-1 text-sm font-semibold text-soul-cyan">
-            🎯 Central de missões
+          <span className="mb-3 inline-flex items-center gap-2 rounded-full border border-soul-cyan/40 bg-soul-cyan/10 px-4 py-1 text-sm font-semibold text-soul-cyan">
+            <Target className="h-4 w-4" aria-hidden="true" />
+            Central de missões
           </span>
           <h2 className="text-3xl font-bold text-white sm:text-5xl">Dashboard</h2>
           <p className="mt-2 text-white/70">

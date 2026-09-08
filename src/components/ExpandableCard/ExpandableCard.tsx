@@ -1,8 +1,9 @@
+import { ChevronDown, ChevronUp, type LucideIcon } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import Card from "../Card/Card";
 
 interface ExpandableCardProps {
-  emoji: string;
+  icon: LucideIcon;
   title: string;
   color: string;
   summary: ReactNode;
@@ -11,7 +12,7 @@ interface ExpandableCardProps {
 }
 
 export default function ExpandableCard({
-  emoji,
+  icon: Icon,
   title,
   color,
   summary,
@@ -23,10 +24,10 @@ export default function ExpandableCard({
   return (
     <Card glow={color} className={className}>
       <div
-        className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl text-xl"
+        className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl"
         style={{ backgroundColor: `${color}22`, color }}
       >
-        <span aria-hidden="true">{emoji}</span>
+        <Icon className="h-5 w-5" aria-hidden="true" />
       </div>
       <h3 className="mb-2 text-lg font-semibold text-white">{title}</h3>
       <div className="text-sm text-white/75">{summary}</div>
@@ -43,7 +44,12 @@ export default function ExpandableCard({
         style={{ color }}
         aria-expanded={expanded}
       >
-        {expanded ? "Mostrar menos ▲" : "Gostou? Leia mais! ▼"}
+        {expanded ? "Mostrar menos" : "Gostou? Leia mais!"}
+        {expanded ? (
+          <ChevronUp className="h-4 w-4" aria-hidden="true" />
+        ) : (
+          <ChevronDown className="h-4 w-4" aria-hidden="true" />
+        )}
       </button>
     </Card>
   );

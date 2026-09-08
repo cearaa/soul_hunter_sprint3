@@ -1,3 +1,4 @@
+import { TriangleAlert } from "lucide-react";
 import type { ReactNode } from "react";
 
 interface FormFieldProps {
@@ -69,7 +70,7 @@ export default function FormField({
           role="alert"
           className="animate-fade-in flex items-start gap-1.5 font-medium text-rose-300"
         >
-          <span aria-hidden="true">⚠️</span>
+          <TriangleAlert className="mt-px h-3.5 w-3.5 shrink-0" aria-hidden="true" />
           <span>{error}</span>
         </p>
       ) : (

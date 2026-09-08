@@ -1,3 +1,4 @@
+import { Award, Crown, Medal, type LucideIcon } from "lucide-react";
 import type { Medalha, RankingEntry } from "../types";
 
 /**
@@ -15,11 +16,18 @@ export const rankingReferencia: Omit<RankingEntry, "posicao" | "medalha">[] = [
   { usuario: "Usuário Anônimo", pontos: 330 },
 ];
 
-export const medalhaEmoji: Record<Medalha, string> = {
-  ouro: "🥇",
-  prata: "🥈",
-  bronze: "🥉",
-  none: "—",
+export interface MedalhaVisual {
+  icon: LucideIcon;
+  color: string;
+  label: string;
+}
+
+/** Ícone e cor de cada medalha. Posições sem medalha retornam null. */
+export const medalhaVisual: Record<Medalha, MedalhaVisual | null> = {
+  ouro: { icon: Crown, color: "#fbbf24", label: "Medalha de ouro" },
+  prata: { icon: Medal, color: "#cbd5e1", label: "Medalha de prata" },
+  bronze: { icon: Award, color: "#d97706", label: "Medalha de bronze" },
+  none: null,
 };
 
 function medalhaPorPosicao(posicao: number): Medalha {

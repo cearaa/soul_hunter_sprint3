@@ -1,3 +1,4 @@
+import { Sparkles } from "lucide-react";
 import { useEffect } from "react";
 import { useGame } from "../../context/GameContext";
 
@@ -28,8 +29,9 @@ function Toast({
   }, [id, onDone]);
 
   return (
-    <div className="animate-float-slow pointer-events-none rounded-xl border border-soul-gold/40 bg-soul-900/95 px-4 py-3 text-center font-semibold text-soul-gold shadow-[0_0_20px_rgba(251,191,36,0.35)]">
-      {message}
+    <div className="animate-float-slow pointer-events-none flex items-center justify-center gap-2 rounded-xl border border-soul-gold/40 bg-soul-900/95 px-4 py-3 text-center font-semibold text-soul-gold shadow-[0_0_20px_rgba(251,191,36,0.35)]">
+      <Sparkles className="h-4 w-4 shrink-0" aria-hidden="true" />
+      <span>{message}</span>
     </div>
   );
 }

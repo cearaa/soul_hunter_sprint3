@@ -1,3 +1,16 @@
+import {
+  BookOpen,
+  CircleHelp,
+  Ghost,
+  House,
+  Mail,
+  Menu,
+  Target,
+  Trophy,
+  Users,
+  X,
+  type LucideIcon,
+} from "lucide-react";
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { getPageAccent } from "../../theme/pageAccent";
@@ -5,18 +18,18 @@ import { getPageAccent } from "../../theme/pageAccent";
 interface NavItem {
   label: string;
   to: string;
-  emoji: string;
+  icon: LucideIcon;
 }
 
 const navItems: NavItem[] = [
-  { label: "Home", to: "/", emoji: "🏠" },
-  { label: "Integrantes", to: "/integrantes", emoji: "🧑‍🚀" },
-  { label: "Sobre", to: "/sobre", emoji: "📖" },
-  { label: "FAQ", to: "/faq", emoji: "❓" },
-  { label: "Contato", to: "/contato", emoji: "✉️" },
-  { label: "Dashboard", to: "/dashboard", emoji: "🎯" },
-  { label: "Ranking", to: "/ranking", emoji: "🏆" },
-  { label: "Fantasma", to: "/fantasma", emoji: "👻" },
+  { label: "Home", to: "/", icon: House },
+  { label: "Integrantes", to: "/integrantes", icon: Users },
+  { label: "Sobre", to: "/sobre", icon: BookOpen },
+  { label: "FAQ", to: "/faq", icon: CircleHelp },
+  { label: "Contato", to: "/contato", icon: Mail },
+  { label: "Dashboard", to: "/dashboard", icon: Target },
+  { label: "Ranking", to: "/ranking", icon: Trophy },
+  { label: "Fantasma", to: "/fantasma", icon: Ghost },
 ];
 
 export default function Header() {
@@ -42,18 +55,18 @@ export default function Header() {
           onClick={closeMenu}
           className="flex shrink-0 items-center gap-2 text-xl font-extrabold tracking-tight text-white"
         >
-          <span className="text-2xl">👻</span>
+          <Ghost className="h-7 w-7" strokeWidth={2.2} aria-hidden="true" />
           <span className="neon-text">SoulHunter</span>
         </NavLink>
 
         <button
-          className="rounded-lg border border-white/30 px-3 py-1 text-2xl text-white md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/30 text-white md:hidden"
           id="menuToggle"
-          aria-label="Abrir menu"
+          aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
           aria-expanded={menuOpen}
           onClick={toggleMenu}
         >
-          ☰
+          {menuOpen ? <X className="h-6 w-6" aria-hidden="true" /> : <Menu className="h-6 w-6" aria-hidden="true" />}
         </button>
 
         <nav
@@ -74,7 +87,7 @@ export default function Header() {
                 }`
               }
             >
-              <span aria-hidden="true">{item.emoji}</span>
+              <item.icon className="h-4 w-4 shrink-0" aria-hidden="true" />
               {item.label}
             </NavLink>
           ))}
