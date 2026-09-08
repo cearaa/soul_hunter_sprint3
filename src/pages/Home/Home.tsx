@@ -168,7 +168,7 @@ export default function Home() {
           <h2 className="mb-10 text-3xl font-bold text-white sm:text-4xl">Como funciona</h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((step, index) => (
-              <div key={step.title} className="glass-card relative p-6">
+              <div key={step.title} className="glass-card relative p-6 transition-transform duration-300 hover:-translate-y-1">
                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-soul-cyan px-3 py-0.5 text-xs font-bold text-soul-950">
                   {index + 1}
                 </span>
@@ -188,7 +188,7 @@ export default function Home() {
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="glass-card min-w-[180px] flex-1 p-8 text-center"
+              className="glass-card min-w-[180px] flex-1 p-8 text-center transition-transform duration-300 hover:-translate-y-1"
             >
               <h3 className="text-3xl font-bold text-soul-cyan neon-text">{stat.value}</h3>
               <p className="text-white/70">{stat.label}</p>
