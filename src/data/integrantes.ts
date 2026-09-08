@@ -31,7 +31,7 @@ export const integrantes: Integrante[] = [
   },
   {
     id: "italo-neto",
-    nome: "Ítalo Neto",
+    nome: "Italo Neto",
     rm: "572912",
     turma: "1TDSPH",
     foto: italoFoto,
