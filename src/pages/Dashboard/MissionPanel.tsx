@@ -58,8 +58,8 @@ export default function MissionPanel() {
       ) : (
         <>
           <p className="mb-3 text-sm text-white/70">
-            Caçador(a) <strong className="text-soul-cyan">{username}</strong>, responda o que
-            quiser — qualquer resposta já garante seus pontos!
+            Caçador(a) <strong className="text-soul-cyan">{username}</strong>, cada atitude sustentável conta! 
+            Responda as missões abaixo e transforme suas ações em pontos.
           </p>
           <div className="flex-1 space-y-3 overflow-y-auto pr-1" style={{ maxHeight: "420px" }}>
             {missoes.map((missao) => {
