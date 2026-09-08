@@ -1,3 +1,4 @@
+import { ChevronDown, ChevronUp, Ghost as GhostIcon, Users } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import githubIcon from "../../assets/img/icones/github.png";
@@ -26,8 +27,9 @@ export default function Integrantes() {
         ]}
       />
       <div className="relative mx-auto w-[90%] max-w-6xl text-center">
-        <span className="mb-3 inline-block rounded-full border border-soul-violet/40 bg-soul-violet/10 px-4 py-1 text-sm font-semibold text-soul-violet-soft">
-          🧑‍🚀 A equipe por trás da caçada
+        <span className="mb-3 inline-flex items-center gap-2 rounded-full border border-soul-violet/40 bg-soul-violet/10 px-4 py-1 text-sm font-semibold text-soul-violet-soft">
+          <Users className="h-4 w-4" aria-hidden="true" />
+          A equipe por trás da caçada
         </span>
         <h2 className="mb-3 text-3xl font-bold text-white sm:text-5xl">Integrantes</h2>
         <p className="mx-auto mb-10 max-w-2xl text-white/70">
@@ -95,14 +97,19 @@ export default function Integrantes() {
                     style={{ color: ghostColor }}
                     aria-expanded={isExpanded}
                   >
-                    {isExpanded ? "Mostrar menos ▲" : "Ver mais sobre esse BBzão ▼"}
+                    {isExpanded ? "Mostrar menos" : "Ver mais sobre esse BBzão"}
+                    {isExpanded ? (
+                      <ChevronUp className="h-4 w-4" aria-hidden="true" />
+                    ) : (
+                      <ChevronDown className="h-4 w-4" aria-hidden="true" />
+                    )}
                   </button>
 
                   {isExpanded && (
                     <div className="mt-3 border-t border-white/10 pt-3 text-sm text-white/75">
                       <p className="mb-2">{integrante.bio}</p>
                       <p className="flex items-center gap-1 text-white/60">
-                        <span aria-hidden="true">👻</span> Alma favorita:{" "}
+                        <GhostIcon className="h-4 w-4 shrink-0" style={{ color: ghostColor }} aria-hidden="true" /> Alma favorita:{" "}
                         <span className="font-semibold text-white/85">
                           {integrante.fantasmaFavorito}
                         </span>

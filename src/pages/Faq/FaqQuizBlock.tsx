@@ -1,3 +1,4 @@
+import { PartyPopper, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { useGame } from "../../context/GameContext";
 import type { FaqQuiz } from "../../data/faq";
@@ -22,15 +23,16 @@ export default function FaqQuizBlock({ faqId, quiz }: FaqQuizBlockProps) {
       missionId,
       quiz.pontos,
       index === quiz.respostaCorretaIndex
-        ? `Certíssimo! +${quiz.pontos} pontos 🎉`
-        : `Já que você tentou, tome uns pontos 🎉 (+${quiz.pontos})`,
+        ? `Certíssimo! +${quiz.pontos} pontos`
+        : `Já que você tentou, tome uns pontos (+${quiz.pontos})`,
     );
   }
 
   return (
     <div className="mt-3 rounded-xl border border-soul-magenta/30 bg-soul-magenta/5 p-4">
-      <p className="mb-3 text-sm font-semibold text-soul-magenta">
-        ✨ Quer revisar? Teste seu conhecimento!
+      <p className="mb-3 flex items-center gap-1.5 text-sm font-semibold text-soul-magenta">
+        <Sparkles className="h-4 w-4 shrink-0" aria-hidden="true" />
+        Quer revisar? Teste seu conhecimento!
       </p>
       <p className="mb-3 text-sm text-white/85">{quiz.pergunta}</p>
       <div className="flex flex-col gap-2">
@@ -57,10 +59,11 @@ export default function FaqQuizBlock({ faqId, quiz }: FaqQuizBlockProps) {
       </div>
 
       {jaRespondeu && (
-        <p className="mt-3 text-sm font-semibold text-soul-gold">
+        <p className="mt-3 flex items-center gap-1.5 text-sm font-semibold text-soul-gold">
+          <PartyPopper className="h-4 w-4 shrink-0" aria-hidden="true" />
           {acertou
-            ? "Certíssimo! Você manja mesmo de SoulHunter. 🎉"
-            : "Já que você tentou, tome uns pontos 🎉"}
+            ? "Certíssimo! Você manja mesmo de SoulHunter."
+            : "Já que você tentou, tome uns pontos"}
         </p>
       )}
     </div>

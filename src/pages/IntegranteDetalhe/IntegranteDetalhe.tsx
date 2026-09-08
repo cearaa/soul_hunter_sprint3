@@ -1,3 +1,4 @@
+import { Ghost as GhostIcon } from "lucide-react";
 import { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import githubIcon from "../../assets/img/icones/github.png";
@@ -55,8 +56,9 @@ export default function IntegranteDetalhe() {
         <p className="mb-1 text-white/70">RM: {integrante.rm}</p>
         <p className="mb-4 text-white/70">Turma: {integrante.turma}</p>
         <p className="mx-auto mb-2 max-w-xl text-white/80">{integrante.bio}</p>
-        <p className="mb-6 text-soul-violet-soft">
-          👻 Alma favorita: <strong>{integrante.fantasmaFavorito}</strong>
+        <p className="mb-6 flex items-center justify-center gap-1.5 text-soul-violet-soft">
+          <GhostIcon className="h-4 w-4" aria-hidden="true" />
+          Alma favorita: <strong>{integrante.fantasmaFavorito}</strong>
         </p>
 
         <div className="mb-8 flex items-center justify-center gap-3">

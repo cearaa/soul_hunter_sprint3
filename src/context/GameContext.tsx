@@ -37,7 +37,7 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       if (state.answeredMissionIds.includes(action.missionId)) {
         return state;
       }
-      const toastMessage = action.message ?? `+${action.amount} pontos! 👻`;
+      const toastMessage = action.message ?? `+${action.amount} pontos!`;
       return {
         ...state,
         points: state.points + action.amount,

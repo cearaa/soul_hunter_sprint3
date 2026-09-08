@@ -1,6 +1,7 @@
+import { Minus, Trophy } from "lucide-react";
 import GhostField from "../../components/Ghost/GhostField";
 import { useGame } from "../../context/GameContext";
-import { buildRanking, medalhaEmoji } from "../../data/ranking";
+import { buildRanking, medalhaVisual } from "../../data/ranking";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 
 export default function Ranking() {
@@ -18,8 +19,9 @@ export default function Ranking() {
         ]}
       />
       <div className="relative mx-auto w-[90%] max-w-4xl text-center">
-        <span className="mb-3 inline-block rounded-full border border-soul-gold/40 bg-soul-gold/10 px-4 py-1 text-sm font-semibold text-soul-gold">
-          🏆 Hall da fama
+        <span className="mb-3 inline-flex items-center gap-2 rounded-full border border-soul-gold/40 bg-soul-gold/10 px-4 py-1 text-sm font-semibold text-soul-gold">
+          <Trophy className="h-4 w-4" aria-hidden="true" />
+          Hall da fama
         </span>
         <h2 className="mb-3 text-3xl font-bold text-white sm:text-5xl">Ranking</h2>
         <p className="mb-8 text-white/70">
@@ -51,6 +53,7 @@ export default function Ranking() {
             <tbody>
               {ranking.map((entrada) => {
                 const isVoce = entrada.usuario === username;
+                const medalha = medalhaVisual[entrada.medalha];
                 return (
                   <tr
                     key={entrada.usuario}
@@ -66,8 +69,19 @@ export default function Ranking() {
                     <td className="border border-white/10 px-3 py-3 text-white/85 sm:px-4 sm:py-4">
                       {entrada.pontos}
                     </td>
-                    <td className="border border-white/10 px-3 py-3 text-xl sm:px-4 sm:py-4 sm:text-2xl">
-                      {medalhaEmoji[entrada.medalha]}
+                    <td className="border border-white/10 px-3 py-3 sm:px-4 sm:py-4">
+                      {medalha ? (
+                        <span
+                          className="mx-auto flex h-9 w-9 items-center justify-center rounded-full"
+                          style={{ backgroundColor: `${medalha.color}22`, color: medalha.color, boxShadow: `0 0 14px ${medalha.color}44` }}
+                          role="img"
+                          aria-label={medalha.label}
+                        >
+                          <medalha.icon className="h-5 w-5" aria-hidden="true" />
+                        </span>
+                      ) : (
+                        <Minus className="mx-auto h-4 w-4 text-white/30" aria-label="Sem medalha" />
+                      )}
                     </td>
                   </tr>
                 );
