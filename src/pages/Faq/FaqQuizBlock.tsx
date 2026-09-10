@@ -1,6 +1,6 @@
 import { PartyPopper, Sparkles } from "lucide-react";
 import { useState } from "react";
-import { useGame } from "../../context/GameContext";
+import { useGame } from "../../context/useGame";
 import type { FaqQuiz } from "../../data/faq";
 
 interface FaqQuizBlockProps {

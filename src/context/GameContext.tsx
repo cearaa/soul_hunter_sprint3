@@ -32,9 +32,6 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       return { ...state, username: trimmed === "" ? "Visitante" : trimmed };
     }
     case "AWARD_POINTS": {
-      // Atualização atômica: se a missão já foi respondida, não faz nada.
-      // Isso evita duplicidade mesmo se o React invocar o reducer mais de
-      // uma vez (ex: StrictMode em desenvolvimento), pois o reducer é puro.
       if (state.answeredMissionIds.includes(action.missionId)) {
         return state;
       }

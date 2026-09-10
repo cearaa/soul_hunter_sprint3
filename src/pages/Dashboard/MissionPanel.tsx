@@ -1,6 +1,6 @@
 import { CircleCheck, Ghost as GhostIcon, Target } from "lucide-react";
 import { useState, type FormEvent } from "react";
-import { useGame } from "../../context/GameContext";
+import { useGame } from "../../context/useGame";
 import { missoes } from "../../data/missoes";
 
 export default function MissionPanel() {

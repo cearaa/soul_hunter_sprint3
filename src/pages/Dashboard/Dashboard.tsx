@@ -1,6 +1,6 @@
 import { Target } from "lucide-react";
 import GhostField from "../../components/Ghost/GhostField";
-import { useGame } from "../../context/GameContext";
+import { useGame } from "../../context/useGame";
 import { buildRanking } from "../../data/ranking";
 import { missoes } from "../../data/missoes";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";

@@ -1,6 +1,6 @@
 import { Sparkles } from "lucide-react";
 import { useEffect } from "react";
-import { useGame } from "../../context/GameContext";
+import { useGame } from "../../context/useGame";
 
 export default function ToastStack() {
   const { toasts, dismissToast } = useGame();
