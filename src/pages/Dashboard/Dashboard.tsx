@@ -17,8 +17,9 @@ export default function Dashboard() {
   const ranking = buildRanking(username, points);
   const minhaPosicao = ranking.find((entrada) => entrada.usuario === username)?.posicao ?? "—";
 
-  const missoesRespondidas = Math.min(missionsCompleted, missoes.length);
-  const progresso = Math.round((missoesRespondidas / missoes.length) * 100);
+  const totalMissoes = missoes.length + 1;
+  const missoesRespondidas = Math.min(missionsCompleted, missoes.length) + (diaRespondido ? 1 : 0);
+  const progresso = Math.round((missoesRespondidas / totalMissoes) * 100);
 
   return (
     <section className="relative overflow-hidden py-10">
@@ -121,7 +122,7 @@ export default function Dashboard() {
                 />
               </div>
               <p className="mt-2 text-xs text-white/50">
-                {missoesRespondidas} de {missoes.length} missões respondidas nesta sessão.
+                {missoesRespondidas} de {totalMissoes} missões respondidas nesta sessão.
               </p>
             </div>
 
