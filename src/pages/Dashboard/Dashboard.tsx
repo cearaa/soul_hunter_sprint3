@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Target } from "lucide-react";
+import bgReciclagem from "../../assets/img/reciclagem/reciclagem.jpg";
 import GhostField from "../../components/Ghost/GhostField";
 import { useGame } from "../../context/GameContext";
 import { buildRanking } from "../../data/ranking";
@@ -18,7 +19,7 @@ export default function Dashboard() {
   const minhaPosicao = ranking.find((entrada) => entrada.usuario === username)?.posicao ?? "—";
 
   const totalMissoes = missoes.length + 1;
-  const missoesRespondidas = Math.min(missionsCompleted, missoes.length) + (diaRespondido ? 1 : 0);
+  const missoesRespondidas = Math.min(missionsCompleted, totalMissoes);
   const progresso = Math.round((missoesRespondidas / totalMissoes) * 100);
 
   return (
@@ -128,7 +129,11 @@ export default function Dashboard() {
 
             <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="glass-card overflow-hidden p-0">
-                <div className="h-40 bg-linear-to-t from-soul-cyan to-soul-violet" />
+                <img 
+                  src={bgReciclagem} 
+                  alt="Materiais de reciclagem em destaque" 
+                  className="h-40 w-full object-cover opacity-85 transition-opacity hover:opacity-100"
+                />
                 <div className="p-4">
                   <h4 className="font-semibold text-white">Atividade recente</h4>
                   <p className="text-sm text-white/60">
