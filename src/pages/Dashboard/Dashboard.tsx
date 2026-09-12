@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Target } from "lucide-react";
 import GhostField from "../../components/Ghost/GhostField";
 import { useGame } from "../../context/GameContext";
@@ -9,6 +10,9 @@ import MissionPanel from "./MissionPanel";
 export default function Dashboard() {
   useDocumentTitle("Dashboard");
   const { username, points, missionsCompleted } = useGame();
+
+  const [respostaDia, setRespostaDia] = useState("");
+  const [diaRespondido, setDiaRespondido] = useState(false);
 
   const ranking = buildRanking(username, points);
   const minhaPosicao = ranking.find((entrada) => entrada.usuario === username)?.posicao ?? "—";
@@ -64,21 +68,40 @@ export default function Dashboard() {
 
             <div className="glass-card mt-6 p-5">
               <h3 className="mb-4 text-lg font-bold text-white">Pergunta do Dia</h3>
-              <div className="flex flex-col gap-3">
-                <p className="text-sm text-white/80">
-                  Dica do Caçador: Essa estação é famosa por estar no marco zero da cidade de São Paulo e ficar de frente para uma linda catedral. Qual é a estação?
-                </p>
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    placeholder="Digite aqui sua resposta"
-                    className="min-w-0 flex-1 rounded-lg border border-white/15 bg-soul-900/60 px-3 py-2 text-sm text-white placeholder:text-white/40 focus:border-soul-cyan focus:outline-none"
-                  />
-                  <button className="shrink-0 rounded-lg bg-soul-cyan/20 px-4 py-2 text-sm font-semibold text-soul-cyan transition-colors hover:bg-soul-cyan/30">
-                    Investigar
-                  </button>
+              
+              {!diaRespondido ? (
+                <div className="flex flex-col gap-3">
+                  <p className="text-sm text-white/80">
+                    Dica do Caçador: Essa estação é famosa por estar no marco zero da cidade de São Paulo e ficar de frente para uma linda catedral. Qual é a estação?
+                  </p>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={respostaDia}
+                      onChange={(e) => setRespostaDia(e.target.value)}
+                      placeholder="Digite aqui sua resposta"
+                      className="min-w-0 flex-1 rounded-lg border border-white/15 bg-soul-900/60 px-3 py-2 text-sm text-white placeholder:text-white/40 focus:border-soul-cyan focus:outline-none"
+                    />
+                    <button
+                      onClick={() => {
+                        const respostaFormatada = respostaDia.toLowerCase().trim();
+                        if (respostaFormatada.includes("sé") || respostaFormatada.includes("se")) {
+                          setDiaRespondido(true);
+                        } else if (respostaFormatada !== "") {
+                          alert("Alma não encontrada por aqui. Tente outra estação!");
+                        }
+                      }}
+                      className="shrink-0 rounded-lg bg-soul-cyan/20 px-4 py-2 text-sm font-semibold text-soul-cyan transition-colors hover:bg-soul-cyan/30"
+                    >
+                      Investigar
+                    </button>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <p className="text-sm font-semibold text-soul-teal">
+                  parabéns!! Você acertou, a alma foi rastreada com sucesso! Vá até a estação para resgatar sua alma! Volte amanhã para uma nova pista.
+                </p>
+              )}
             </div>
 
             <div className="glass-card mt-6 p-5">
@@ -88,7 +111,7 @@ export default function Dashboard() {
               </div>
               <div className="h-4 overflow-hidden rounded-full bg-white/10">
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-soul-cyan via-soul-teal to-soul-violet transition-all duration-1000 ease-out"
+                  className="h-full rounded-full bg-linear-to-r from-soul-cyan via-soul-teal to-soul-violet transition-all duration-1000 ease-out"
                   style={{ width: `${progresso}%` }}
                   role="progressbar"
                   aria-valuenow={progresso}
@@ -103,7 +126,7 @@ export default function Dashboard() {
 
             <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="glass-card overflow-hidden p-0">
-                <div className="h-40 bg-gradient-to-t from-soul-cyan to-soul-violet" />
+                <div className="h-40 bg-linear-to-t from-soul-cyan to-soul-violet" />
                 <div className="p-4">
                   <h4 className="font-semibold text-white">Atividade recente</h4>
                   <p className="text-sm text-white/60">
@@ -112,7 +135,7 @@ export default function Dashboard() {
                 </div>
               </div>
               <div className="glass-card overflow-hidden p-0">
-                <div className="h-40 bg-gradient-to-t from-soul-magenta to-soul-gold" />
+                <div className="h-40 bg-linear-to-t from-soul-magenta to-soul-gold" />
                 <div className="p-4">
                   <h4 className="font-semibold text-white">Próxima recompensa</h4>
                   <p className="text-sm text-white/60">
