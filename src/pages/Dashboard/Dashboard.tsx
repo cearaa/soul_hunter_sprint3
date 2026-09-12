@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Target } from "lucide-react";
+import bgReciclagem from "../../assets/img/reciclagem/reciclagem.jpg";
 import GhostField from "../../components/Ghost/GhostField";
 import { useGame } from "../../context/useGame";
 import { buildRanking } from "../../data/ranking";
@@ -8,13 +10,17 @@ import MissionPanel from "./MissionPanel";
 
 export default function Dashboard() {
   useDocumentTitle("Dashboard");
-  const { username, points, missionsCompleted } = useGame();
+  const { username, points, missionsCompleted, awardPoints } = useGame();
+
+  const [respostaDia, setRespostaDia] = useState("");
+  const [diaRespondido, setDiaRespondido] = useState(false);
 
   const ranking = buildRanking(username, points);
   const minhaPosicao = ranking.find((entrada) => entrada.usuario === username)?.posicao ?? "—";
 
-  const missoesRespondidas = Math.min(missionsCompleted, missoes.length);
-  const progresso = Math.round((missoesRespondidas / missoes.length) * 100);
+  const totalMissoes = missoes.length + 1;
+  const missoesRespondidas = Math.min(missionsCompleted, totalMissoes);
+  const progresso = Math.round((missoesRespondidas / totalMissoes) * 100);
 
   return (
     <section className="relative overflow-hidden py-10">
@@ -63,13 +69,52 @@ export default function Dashboard() {
             </div>
 
             <div className="glass-card mt-6 p-5">
+              <h3 className="mb-4 text-lg font-bold text-white">Pergunta do Dia</h3>
+              
+              {!diaRespondido ? (
+                <div className="flex flex-col gap-3">
+                  <p className="text-sm text-white/80">
+                    Dica do Caçador: Essa estação é famosa por estar no marco zero da cidade de São Paulo e ficar de frente para uma linda catedral. Qual é a estação?
+                  </p>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={respostaDia}
+                      onChange={(e) => setRespostaDia(e.target.value)}
+                      placeholder="Digite aqui sua resposta"
+                      className="min-w-0 flex-1 rounded-lg border border-white/15 bg-soul-900/60 px-3 py-2 text-sm text-white placeholder:text-white/40 focus:border-soul-cyan focus:outline-none"
+                    />
+                    <button
+                      onClick={() => {
+                        const respostaFormatada = respostaDia.toLowerCase().trim();
+                        if (respostaFormatada.includes("sé") || respostaFormatada.includes("se")) {
+                          awardPoints("pista-se", 50, "+50 pontos por decifrar a pista da Sé!");
+                          setDiaRespondido(true);
+                        } else if (respostaFormatada !== "") {
+                          alert("Alma não encontrada por aqui. Tente outra estação!");
+                        }
+                      }}
+                      className="shrink-0 rounded-lg bg-soul-cyan/20 px-4 py-2 text-sm font-semibold text-soul-cyan transition-colors hover:bg-soul-cyan/30"
+                    >
+                      Investigar
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <p className="text-sm font-semibold text-soul-teal">
+                  parabéns!! Você acertou e de cara ganhou 50 pontos, Vá até a estação para resgatar sua alma e garantir mais pontos e uma nova alma! Volte amanhã para uma nova pista.
+                </p>
+              )}
+            </div>
+
+            <div className="glass-card mt-6 p-5">
               <div className="mb-2 flex items-center justify-between">
                 <h3 className="font-semibold text-white">Progresso geral</h3>
                 <span className="text-sm text-white/60">{progresso}%</span>
               </div>
               <div className="h-4 overflow-hidden rounded-full bg-white/10">
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-soul-cyan via-soul-teal to-soul-violet transition-all duration-1000 ease-out"
+                  className="h-full rounded-full bg-linear-to-r from-soul-cyan via-soul-teal to-soul-violet transition-all duration-1000 ease-out"
                   style={{ width: `${progresso}%` }}
                   role="progressbar"
                   aria-valuenow={progresso}
@@ -78,13 +123,17 @@ export default function Dashboard() {
                 />
               </div>
               <p className="mt-2 text-xs text-white/50">
-                {missoesRespondidas} de {missoes.length} missões respondidas nesta sessão.
+                {missoesRespondidas} de {totalMissoes} missões respondidas nesta sessão.
               </p>
             </div>
 
             <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="glass-card overflow-hidden p-0">
-                <div className="h-40 bg-gradient-to-t from-soul-cyan to-soul-violet" />
+                <img 
+                  src={bgReciclagem} 
+                  alt="Materiais de reciclagem em destaque" 
+                  className="h-40 w-full object-cover opacity-85 transition-opacity hover:opacity-100"
+                />
                 <div className="p-4">
                   <h4 className="font-semibold text-white">Atividade recente</h4>
                   <p className="text-sm text-white/60">
@@ -93,7 +142,7 @@ export default function Dashboard() {
                 </div>
               </div>
               <div className="glass-card overflow-hidden p-0">
-                <div className="h-40 bg-gradient-to-t from-soul-magenta to-soul-gold" />
+                <div className="h-40 bg-linear-to-t from-soul-magenta to-soul-gold" />
                 <div className="p-4">
                   <h4 className="font-semibold text-white">Próxima recompensa</h4>
                   <p className="text-sm text-white/60">
