@@ -9,7 +9,7 @@ import MissionPanel from "./MissionPanel";
 
 export default function Dashboard() {
   useDocumentTitle("Dashboard");
-  const { username, points, missionsCompleted } = useGame();
+  const { username, points, missionsCompleted, awardPoints } = useGame();
 
   const [respostaDia, setRespostaDia] = useState("");
   const [diaRespondido, setDiaRespondido] = useState(false);
@@ -86,6 +86,7 @@ export default function Dashboard() {
                       onClick={() => {
                         const respostaFormatada = respostaDia.toLowerCase().trim();
                         if (respostaFormatada.includes("sé") || respostaFormatada.includes("se")) {
+                          awardPoints("pista-se", 50, "+50 pontos por decifrar a pista da Sé!");
                           setDiaRespondido(true);
                         } else if (respostaFormatada !== "") {
                           alert("Alma não encontrada por aqui. Tente outra estação!");
@@ -99,7 +100,7 @@ export default function Dashboard() {
                 </div>
               ) : (
                 <p className="text-sm font-semibold text-soul-teal">
-                  parabéns!! Você acertou, a alma foi rastreada com sucesso! Vá até a estação para resgatar sua alma! Volte amanhã para uma nova pista.
+                  parabéns!! Você acertou e de cara ganhou 50 pontos, Vá até a estação para resgatar sua alma e garantir mais pontos e uma nova alma! Volte amanhã para uma nova pista.
                 </p>
               )}
             </div>
