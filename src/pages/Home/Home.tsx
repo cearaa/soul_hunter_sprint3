@@ -164,22 +164,35 @@ export default function Home() {
       </section>
 
       <section className="relative overflow-hidden bg-soul-950/60 py-16">
-        <div className="mx-auto w-[90%] max-w-6xl text-center">
-          <h2 className="mb-10 text-3xl font-bold text-white sm:text-4xl">Como funciona</h2>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto w-[90%] max-w-6xl">
+          <h2 className="mb-14 text-center text-3xl font-bold text-white sm:text-4xl">Como funciona</h2>
+          <ol className="relative lg:grid lg:grid-cols-4 lg:gap-6">
+            <div
+              aria-hidden="true"
+              className="absolute top-6 right-[12.5%] left-[12.5%] hidden h-0.5 -translate-y-1/2 bg-gradient-to-r from-soul-cyan via-soul-violet to-soul-magenta lg:block"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute top-6 bottom-6 left-6 w-0.5 -translate-x-1/2 bg-gradient-to-b from-soul-cyan via-soul-violet to-soul-magenta lg:hidden"
+            />
             {steps.map((step, index) => (
-              <div key={step.title} className="glass-card relative p-6 transition-transform duration-300 hover:-translate-y-1">
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-soul-cyan px-3 py-0.5 text-xs font-bold text-soul-950">
+              <li
+                key={step.title}
+                className="group relative flex gap-5 pb-10 last:pb-0 lg:flex-col lg:items-center lg:gap-0 lg:pb-0 lg:text-center"
+              >
+                <span className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-soul-cyan bg-soul-950 text-sm font-bold text-soul-cyan shadow-[0_0_20px_rgba(34,211,238,0.35)] transition-colors duration-300 group-hover:bg-soul-cyan group-hover:text-soul-950">
                   {index + 1}
                 </span>
-                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-soul-cyan/10 text-soul-cyan">
-                  <step.icon className="h-6 w-6" aria-hidden="true" />
+                <div className="glass-card flex-1 p-6 transition-transform duration-300 group-hover:-translate-y-1 lg:mt-6 lg:w-full">
+                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-soul-cyan/10 text-soul-cyan lg:mx-auto">
+                    <step.icon className="h-6 w-6" aria-hidden="true" />
+                  </div>
+                  <h3 className="mb-1 font-semibold text-white">{step.title}</h3>
+                  <p className="text-sm text-white/70">{step.description}</p>
                 </div>
-                <h3 className="mb-1 font-semibold text-white">{step.title}</h3>
-                <p className="text-sm text-white/70">{step.description}</p>
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
