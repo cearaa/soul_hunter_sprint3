@@ -11,7 +11,7 @@ export default function CardFantasma({
 }: CardFantasmaProps) {
   return (
     <div>
-      <img src={imagem} alt={alt} />
+      <img className="m-4" src={imagem} alt={alt} />
       <h3>{nome}</h3>
     </div>
   );
