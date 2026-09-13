@@ -2,6 +2,7 @@ import {
   CircleCheck,
   Ghost as GhostIcon,
   Handshake,
+  Heart,
   IdCard,
   Leaf,
   Rocket,
@@ -9,6 +10,7 @@ import {
   Ticket,
   TrendingUp,
   Trophy,
+  Users,
   type LucideIcon,
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
@@ -18,6 +20,7 @@ import Button from "../../components/Button/Button";
 import ButtonLink from "../../components/Button/ButtonLink";
 import Card from "../../components/Card/Card";
 import { almas } from "../../data/almas";
+import { useCountUp } from "../../hooks/useCountUp";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 
 interface Feature {
@@ -73,16 +76,43 @@ const features: Feature[] = [
 ];
 
 interface Stat {
-  value: string;
+  target: number;
+  suffix: string;
+  decimals?: number;
   label: string;
+  icon: LucideIcon;
+  color: string;
 }
 
 const stats: Stat[] = [
-  { value: "12k+", label: "Caçadores ativos" },
-  { value: "85k+", label: "Missões concluídas" },
-  { value: "4.3k", label: "Almas capturadas" },
-  { value: "97%", label: "Satisfação" },
+  { target: 12, suffix: "k+", label: "Caçadores ativos", icon: Users, color: "#22d3ee" },
+  { target: 85, suffix: "k+", label: "Missões concluídas", icon: CircleCheck, color: "#2dd4bf" },
+  { target: 4.3, suffix: "k", decimals: 1, label: "Almas capturadas", icon: GhostIcon, color: "#8b5cf6" },
+  { target: 97, suffix: "%", label: "Satisfação", icon: Heart, color: "#fbbf24" },
 ];
+
+function StatItem({ stat }: { stat: Stat }) {
+  const { ref, value } = useCountUp<HTMLDivElement>(stat.target, stat.decimals ?? 0);
+
+  return (
+    <div
+      ref={ref}
+      className="flex flex-col gap-3 bg-soul-950/80 p-6 transition-colors duration-300 hover:bg-soul-900/90 sm:p-7"
+    >
+      <div
+        className="flex h-10 w-10 items-center justify-center rounded-xl"
+        style={{ backgroundColor: `${stat.color}22`, color: stat.color }}
+      >
+        <stat.icon className="h-5 w-5" aria-hidden="true" />
+      </div>
+      <dd className="neon-text text-3xl font-bold tabular-nums sm:text-4xl" style={{ color: stat.color }}>
+        {value}
+        {stat.suffix}
+      </dd>
+      <dt className="text-sm text-white/70">{stat.label}</dt>
+    </div>
+  );
+}
 
 interface Step {
   title: string;
@@ -164,36 +194,78 @@ export default function Home() {
       </section>
 
       <section className="relative overflow-hidden bg-soul-950/60 py-16">
-        <div className="mx-auto w-[90%] max-w-6xl text-center">
-          <h2 className="mb-10 text-3xl font-bold text-white sm:text-4xl">Como funciona</h2>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto w-[90%] max-w-6xl">
+          <h2 className="mb-14 text-center text-3xl font-bold text-white sm:text-4xl">Como funciona</h2>
+          <ol className="relative lg:grid lg:grid-cols-4 lg:gap-6">
+            <div
+              aria-hidden="true"
+              className="absolute top-6 right-[12.5%] left-[12.5%] hidden h-0.5 -translate-y-1/2 bg-gradient-to-r from-soul-cyan via-soul-violet to-soul-magenta lg:block"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute top-6 bottom-6 left-6 w-0.5 -translate-x-1/2 bg-gradient-to-b from-soul-cyan via-soul-violet to-soul-magenta lg:hidden"
+            />
             {steps.map((step, index) => (
-              <div key={step.title} className="glass-card relative p-6 transition-transform duration-300 hover:-translate-y-1">
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-soul-cyan px-3 py-0.5 text-xs font-bold text-soul-950">
+              <li
+                key={step.title}
+                className="group relative flex gap-5 pb-10 last:pb-0 lg:flex-col lg:items-center lg:gap-0 lg:pb-0 lg:text-center"
+              >
+                <span className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-soul-cyan bg-soul-950 text-sm font-bold text-soul-cyan shadow-[0_0_20px_rgba(34,211,238,0.35)] transition-colors duration-300 group-hover:bg-soul-cyan group-hover:text-soul-950">
                   {index + 1}
                 </span>
-                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-soul-cyan/10 text-soul-cyan">
-                  <step.icon className="h-6 w-6" aria-hidden="true" />
+                <div className="glass-card flex-1 p-6 transition-transform duration-300 group-hover:-translate-y-1 lg:mt-6 lg:w-full">
+                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-soul-cyan/10 text-soul-cyan lg:mx-auto">
+                    <step.icon className="h-6 w-6" aria-hidden="true" />
+                  </div>
+                  <h3 className="mb-1 font-semibold text-white">{step.title}</h3>
+                  <p className="text-sm text-white/70">{step.description}</p>
                 </div>
-                <h3 className="mb-1 font-semibold text-white">{step.title}</h3>
-                <p className="text-sm text-white/70">{step.description}</p>
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
-      <section className="mx-auto w-[90%] max-w-6xl py-16">
-        <div className="flex flex-wrap justify-center gap-4">
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="glass-card min-w-[180px] flex-1 p-8 text-center transition-transform duration-300 hover:-translate-y-1"
-            >
-              <h3 className="text-3xl font-bold text-soul-cyan neon-text">{stat.value}</h3>
-              <p className="text-white/70">{stat.label}</p>
+      <section className="relative mx-auto w-[90%] max-w-6xl py-16">
+        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-soul-800/80 via-soul-900 to-soul-950 p-8 shadow-[0_0_60px_rgba(34,211,238,0.08)] sm:p-12">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-soul-cyan/15 blur-3xl"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-24 -left-16 h-72 w-72 rounded-full bg-soul-violet/15 blur-3xl"
+          />
+          <Ghost
+            color="#22d3ee"
+            size={90}
+            variant={2}
+            className="animate-float absolute top-6 right-8 hidden opacity-30 lg:block"
+          />
+
+          <div className="relative grid gap-10 lg:grid-cols-[1fr_1.35fr] lg:items-center">
+            <div>
+              <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-soul-teal/40 bg-soul-teal/10 px-4 py-1 text-sm font-semibold text-soul-teal">
+                <Leaf className="h-4 w-4" aria-hidden="true" />
+                Impacto coletivo
+              </span>
+              <h2 className="mb-3 text-3xl font-bold text-white sm:text-4xl">A caçada em números</h2>
+              <p className="mb-6 text-white/70">
+                Cada missão concluída vira um hábito mais sustentável. Veja o que a comunidade de
+                caçadores já construiu junta — e entre para o time.
+              </p>
+              <ButtonLink to="/ranking" variant="outline" ariaLabel="Ver ranking de caçadores">
+                <Trophy className="h-5 w-5" aria-hidden="true" />
+                Ver quem lidera
+              </ButtonLink>
             </div>
-          ))}
+
+            <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10">
+              {stats.map((stat) => (
+                <StatItem key={stat.label} stat={stat} />
+              ))}
+            </dl>
+          </div>
         </div>
       </section>
 
@@ -213,7 +285,7 @@ export default function Home() {
                 <p className="mt-2 text-sm font-semibold text-white/85">{alma.nome}</p>
               </div>
             ))}
-            <div className="flex flex-col items-center justify-center gap-2">
+            <div className="flex flex-col items-center justify-center gap-2 transition-transform duration-300 hover:scale-110">
               <Ghost color="#67e8f9" size={70} variant={2} />
               <span className="text-sm text-white/60">+ muitas outras</span>
             </div>

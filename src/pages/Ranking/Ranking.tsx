@@ -1,6 +1,6 @@
 import { Minus, Trophy } from "lucide-react";
 import GhostField from "../../components/Ghost/GhostField";
-import { useGame } from "../../context/GameContext";
+import { useGame } from "../../context/useGame";
 import { buildRanking, medalhaVisual } from "../../data/ranking";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 
