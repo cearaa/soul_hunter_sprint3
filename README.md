@@ -19,6 +19,8 @@ Nesta Sprint, o projeto deixou de ser um conjunto de páginas estáticas para se
 - **Central de Missões** — dashboard com progresso das tarefas diárias.
 - **Página de contato** — formulário tipado com validação via React Hook Form.
 - **Rotas dinâmicas** — página de detalhes de cada integrante caçador.
+- **Página do jogo (versão beta)** — QR code de acesso à versão BETA e cards com exemplos de fantasmas encontrados.
+- **Responsividade** — layout adaptado para Mobile (até 480px), Tablet (768px) e Desktop (992px+) com Tailwind CSS.
 
 ## Tecnologias utilizadas
 
@@ -47,6 +49,7 @@ soul_hunter_sprint3/
 │   │   ├── BackToTop/
 │   │   ├── Button/
 │   │   ├── Card/
+│   │   ├── CardFantasma/
 │   │   ├── ExpandableCard/
 │   │   ├── Footer/
 │   │   ├── FormField/
@@ -69,7 +72,8 @@ soul_hunter_sprint3/
 │   │   ├── Integrantes/
 │   │   ├── NotFound/
 │   │   ├── Ranking/
-│   │   └── Sobre/
+│   │   ├── Sobre/
+│   │   └── SoulHunter/
 │   ├── theme/
 │   │   └── pageAccent.ts
 │   ├── types/
