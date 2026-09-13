@@ -285,7 +285,7 @@ export default function Home() {
                 <p className="mt-2 text-sm font-semibold text-white/85">{alma.nome}</p>
               </div>
             ))}
-            <div className="flex flex-col items-center justify-center gap-2">
+            <div className="flex flex-col items-center justify-center gap-2 transition-transform duration-300 hover:scale-110">
               <Ghost color="#67e8f9" size={70} variant={2} />
               <span className="text-sm text-white/60">+ muitas outras</span>
             </div>
