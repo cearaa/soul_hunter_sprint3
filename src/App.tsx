@@ -11,6 +11,7 @@ import Integrantes from "./pages/Integrantes/Integrantes";
 import NotFound from "./pages/NotFound/NotFound";
 import Ranking from "./pages/Ranking/Ranking";
 import Sobre from "./pages/Sobre/Sobre";
+import SoulHunter from "./pages/SoulHunter/SoulHunter";
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
             <Route path="ranking" element={<Ranking />} />
             <Route path="fantasma" element={<Fantasma />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="soulhunter" element={<SoulHunter/>}/>
           </Route>
         </Routes>
       </BrowserRouter>
