@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Target } from "lucide-react";
 import bgReciclagem from "../../assets/img/reciclagem/reciclagem.jpg";
 import GhostField from "../../components/Ghost/GhostField";
-import { useGame } from "../../context/useGame";
+import { useGame } from "../../context/GameContext";
 import { buildRanking } from "../../data/ranking";
 import { missoes } from "../../data/missoes";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
