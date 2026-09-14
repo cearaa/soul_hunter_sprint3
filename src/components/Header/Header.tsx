@@ -8,6 +8,7 @@ import {
   Target,
   Trophy,
   Users,
+  Skull,
   X,
   type LucideIcon,
 } from "lucide-react";
@@ -30,6 +31,7 @@ const navItems: NavItem[] = [
   { label: "Dashboard", to: "/dashboard", icon: Target },
   { label: "Ranking", to: "/ranking", icon: Trophy },
   { label: "Fantasma", to: "/fantasma", icon: Ghost },
+  { label: "BETA", to: "/soulhunter", icon: Skull },
 ];
 
 export default function Header() {
