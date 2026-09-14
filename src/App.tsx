@@ -1,3 +1,4 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import { GameProvider } from "./context/GameContext";
 import Contato from "./pages/Contato/Contato";
@@ -34,8 +35,4 @@ export default function App() {
       </BrowserRouter>
     </GameProvider>
   );
-}
-
-export default function App() {
-  return <Layout />;
 }

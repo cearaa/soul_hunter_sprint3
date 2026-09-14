@@ -1,5 +1,4 @@
-import { useCallback, useMemo, useReducer, type ReactNode } from "react";
-import { GameContext, type GameContextValue } from "./gameContextDefinition";
+import { createContext, useCallback, useContext, useMemo, useReducer, type ReactNode } from "react";
 
 interface PointsToast {
   id: number;
@@ -32,6 +31,9 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       return { ...state, username: trimmed === "" ? "Visitante" : trimmed };
     }
     case "AWARD_POINTS": {
+      // Atualização atômica: se a missão já foi respondida, não faz nada.
+      // Isso evita duplicidade mesmo se o React invocar o reducer mais de
+      // uma vez (ex: StrictMode em desenvolvimento), pois o reducer é puro.
       if (state.answeredMissionIds.includes(action.missionId)) {
         return state;
       }
@@ -53,6 +55,19 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       return state;
   }
 }
+
+interface GameContextValue {
+  username: string;
+  setUsername: (name: string) => void;
+  points: number;
+  missionsCompleted: number;
+  answeredMissionIds: string[];
+  awardPoints: (missionId: string, amount: number, message?: string) => void;
+  toasts: PointsToast[];
+  dismissToast: (id: number) => void;
+}
+
+const GameContext = createContext<GameContextValue | undefined>(undefined);
 
 export function GameProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(gameReducer, initialState);
@@ -87,4 +102,12 @@ export function GameProvider({ children }: { children: ReactNode }) {
   );
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
+}
+
+export function useGame(): GameContextValue {
+  const context = useContext(GameContext);
+  if (!context) {
+    throw new Error("useGame precisa ser usado dentro de um GameProvider");
+  }
+  return context;
 }
